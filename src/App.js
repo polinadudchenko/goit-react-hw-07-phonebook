@@ -11,7 +11,6 @@ import {contactsOperations, contactsSelectors} from 'redux/contacts'
 
 
 function App({ contacts, fetchContacts }) {
-  
   useEffect(() => {
     fetchContacts();
   }, [fetchContacts])
