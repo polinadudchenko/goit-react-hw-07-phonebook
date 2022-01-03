@@ -28,7 +28,8 @@ function ContactForm({contacts, onSubmit}){
         if (contacts.find(contact => (contact.name.toLowerCase() === name.toLowerCase()) || (contact.number.toLowerCase() === number.toLowerCase()))) {
             return toast.info('This contact already in the addressbook')
         }
-        onSubmit(name, number);
+        const contact = {name, number}
+        onSubmit(contact);
         reset();
     }
     
@@ -78,8 +79,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchtoProps = dispatch => ({
-    onSubmit: (name, number) => {
-        dispatch(contactsOperations.addContact(name, number))
+    onSubmit: (contact) => {
+        dispatch(contactsOperations.addContact(contact))
     },
 });
 

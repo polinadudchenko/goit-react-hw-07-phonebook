@@ -3,7 +3,7 @@ import s from './ContactList.module.css';
 import Contact from '../Contact';
 
 export default function ContactList({ contacts, onDeleteContact }) {
- 
+
   return ((contacts.length === 0)
     ? <p className={s.contact__info}>No matches found</p>
     : <table className={s.contact_list} >
