@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
 import s from './ContactList.module.css';
 import Contact from '../Contact';
+import { connect } from 'react-redux';
+import { contactsOperations, contactsSelectors } from 'redux/contacts'
 
-export  default function ContactList({ contacts, onDeleteContact }) {
+function ContactList({ contacts, onDeleteContact }) {
  
   return ((contacts.length === 0)
     ? <p className={s.contact__info}>No matches found</p>
@@ -24,12 +26,25 @@ export  default function ContactList({ contacts, onDeleteContact }) {
   </table>)
 }
 
-ContactList.propTypes = {
+/* ContactList.propTypes = {
         contacts: PropTypes.arrayOf(PropTypes.shape({
             id: PropTypes.string.isRequired,
             name: PropTypes.string.isRequired,
             number: PropTypes.string.isRequired,
         })),
         onDeleteContact: PropTypes.func.isRequired,
-}
+} */
     
+
+
+
+
+const mapStateToProps = (state) => ({
+  contacts: contactsSelectors.getVisibleContacts(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+  onDeleteContact: id => dispatch(contactsOperations.deleteContact(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactList);

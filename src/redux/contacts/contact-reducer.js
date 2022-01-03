@@ -17,12 +17,7 @@ import { toast } from "react-toastify";
 
 const items = createReducer([], {
   [fetchContactsSuccess]: (_, {payload}) => payload,
-  [addContactSuccess]: (state, { payload }) => {
-    if (state.find(contact => contact.name.toLowerCase() === payload.name.toLowerCase())) {
-                return toast.info('This contact already in the addressbook')
-            }
-            return [...state, payload]
-  },
+  [addContactSuccess]: (state, { payload }) => [...state, payload],
   [deleteContactSuccess]: (state, { payload }) => state.filter(({id}) => id !== payload)
 })
 

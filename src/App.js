@@ -14,9 +14,7 @@ function App({ contacts, fetchContacts }) {
   
   useEffect(() => {
     fetchContacts();
-  }, [])
-
-  console.log(contacts);
+  }, [fetchContacts])
 
   return (
       <div className={s.App}>
