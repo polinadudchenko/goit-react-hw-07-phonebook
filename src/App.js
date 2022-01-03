@@ -41,7 +41,7 @@ function App({ contacts, fetchContacts }) {
 }
 
 const mapStateToProps = state => ({
-  contacts: contactsSelectors.getVisibleContacts(state)
+  contacts: contactsSelectors.getContacts(state)
 });
 
 const mapDispatchToProps = dispatch => ({

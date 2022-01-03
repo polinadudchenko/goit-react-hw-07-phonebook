@@ -13,8 +13,6 @@ import {
     filterContacts
 } from './contact-actions'
 
-import { toast } from "react-toastify";
-
 const items = createReducer([], {
   [fetchContactsSuccess]: (_, {payload}) => payload,
   [addContactSuccess]: (state, { payload }) => [...state, payload],
