@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -6,9 +7,16 @@ import ContactForm from './components/ContactForm';
 import ContactList from './components/ContactList';
 import Filter from './components/Filter'
 import Section from './components/Section'
+import {contactsOperations, contactsSelectors} from 'redux/contacts'
 
 
-function App({contacts}) {
+function App({ contacts, fetchContacts }) {
+  
+  useEffect(() => {
+    fetchContacts();
+  }, [])
+
+  console.log(contacts);
 
   return (
       <div className={s.App}>
@@ -35,8 +43,12 @@ function App({contacts}) {
 }
 
 const mapStateToProps = state => ({
-  contacts: state.contacts
+  contacts: contactsSelectors.getVisibleContacts(state)
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => ({
+  fetchContacts: () => dispatch(contactsOperations.fetchContacts()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 

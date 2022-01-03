@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { addContact } from '../../redux/contacts/actions'
+import { contactsOperations, contactsSelectors } from 'redux/contacts'
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types'
 import s from './ContactForm.module.css'
@@ -74,12 +74,12 @@ ContactForm.propTypes = {
 }
 
 const mapStateToProps = state => ({
-    contacts: state.contacts
+    contacts: contactsSelectors.getContacts(state),
 });
 
 const mapDispatchtoProps = dispatch => ({
     onSubmit: (name, number) => {
-        dispatch(addContact(name, number))
+        dispatch(contactsOperations.addContact(name, number))
     },
 });
 
